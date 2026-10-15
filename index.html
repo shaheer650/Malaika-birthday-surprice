@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Malaika 🎂</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1);
+  overflow-x: hidden;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 35px 18px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page.active {
+  display: flex;
+  animation: appear 0.7s ease;
+}
+
+h1 {
+  font-size: 2.2rem;
+  text-shadow: 0 3px 10px #b72c73;
+}
+
+p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 24px;
+  margin: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #d63384;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #9e367755;
+  transition: transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.94);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.balloon-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  max-width: 350px;
+  margin: 25px auto;
+}
+
+.balloon {
+  width: 90px;
+  height: 115px;
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+  cursor: pointer;
+  animation: float 2s ease-in-out infinite alternate;
+  box-shadow: inset -8px -8px 0 #00000015;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 35px;
+  background: white;
+  left: 50%;
+  top: 112px;
+}
+
+.balloon.popped {
+  animation: pop 0.3s forwards;
+  pointer-events: none;
+}
+
+.b1 { background: #ff477e; }
+.b2 { background: #ffd166; animation-delay: .3s; }
+.b3 { background: #06d6a0; animation-delay: .5s; }
+.b4 { background: #70d6ff; animation-delay: .7s; }
+
+.cake {
+  position: relative;
+  width: 220px;
+  height: 160px;
+  margin: 35px auto 20px;
+}
+
+.cake-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 200px;
+  height: 75px;
+  border-radius: 12px 12px 20px 20px;
+  background: #ff8fab;
+  border-bottom: 10px solid #e75480;
+}
+
+.cake-top {
+  position: absolute;
+  left: 10px;
+  bottom: 65px;
+  width: 200px;
+  height: 35px;
+  border-radius: 50%;
+  background: #ffe5ec;
+  border-bottom: 7px solid #ffc2d1;
+}
+
+.candle {
+  position: absolute;
+  bottom: 98px;
+  width: 12px;
+  height: 48px;
+  background: repeating-linear-gradient(
+    45deg, #fff, #fff 5px, #ff477e 5px, #ff477e 10px
+  );
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.candle.one { left: 65px; }
+.candle.two { left: 104px; }
+.candle.three { left: 143px; }
+
+.flame {
+  position: absolute;
+  width: 15px;
+  height: 23px;
+  background: #ffdd57;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  top: -23px;
+  left: -2px;
+  box-shadow: 0 0 15px #ffdf70;
+  animation: flicker 0.5s infinite alternate;
+}
+
+.cake.cut .cake-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  font-size: 24px;
+  animation: rise 5s linear forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#finalMessage {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  from { transform: translateY(0) rotate(-3deg); }
+  to { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes pop {
+  to { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes flicker {
+  from { transform: rotate(-45deg) scale(1); }
+  to { transform: rotate(-40deg) scale(1.12); }
+}
+
+@keyframes rise {
+  to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1: WELCOME -->
+<section class="page active" id="page1">
+  <h1>💖 Welcome, A Special Person! 💖</h1>
+  <p>A little surprise is waiting for you... 🎁</p>
+  <h2>Are you ready? ❤️</h2>
+  <button onclick="showPage(2)">🎀 Tap to Start 🎀</button>
+</section>
+
+<!-- PAGE 2: BALLOONS -->
+<section class="page" id="page2">
+  <h1>🎈 Pop the Balloons! 🎈</h1>
+  <p>Tap all four balloons to discover your surprise!</p>
+
+  <div class="balloon-area">
+    <div class="balloon b1" onclick="popBalloon(this)"></div>
+    <div class="balloon b2" onclick="popBalloon(this)"></div>
+    <div class="balloon b3" onclick="popBalloon(this)"></div>
+    <div class="balloon b4" onclick="popBalloon(this)"></div>
+  </div>
+
+  <p id="balloonCount">Balloons left: 4 🎈</p>
+  <button id="wishButton" class="hidden" onclick="showPage(3)">
+    Open Your Birthday Wish 💌
+  </button>
+</section>
+
+<!-- PAGE 3: BIRTHDAY WISH -->
+<section class="page" id="page3">
+  <h1>🎉 Happy Birthday, Malaika! 🎉</h1>
+  <p>
+    Today is all about you! 💖<br>
+    You deserve happiness, love, and beautiful moments.<br>
+    May your smile always shine! 🌸
+  </p>
+  <div style="font-size:55px">🎂🎁💐</div>
+  <button onclick="showPage(4)">See Your Birthday Cake 🎂</button>
+</section>
+
+<!-- PAGE 4: CAKE AND CANDLES -->
+<section class="page" id="page4">
+  <h1>🎂 Make a Birthday Wish! 🎂</h1>
+  <p>Three candles, one beautiful birthday! ✨</p>
+
+  <div class="cake" id="cake">
+    <div class="cake-bottom"></div>
+    <div class="cake-top"></div>
+
+    <div class="candle one">
+      <div class="flame"></div>
+    </div>
+
+    <div class="candle two">
+      <div class="flame"></div>
+    </div>
+
+    <div class="candle three">
+      <div class="flame"></div>
+    </div>
+  </div>
+
+  <button id="blowButton" onclick="blowCandles()">
+    🌬️ Blow Out the Candles
+  </button>
+
+  <button id="cutButton" class="hidden" onclick="cutCake()">
+    🔪 Cut the Cake!
+  </button>
+
+  <p id="cakeMessage"></p>
+</section>
+
+<!-- PAGE 5: FINAL MESSAGE -->
+<section class="page" id="page5">
+  <h1>💖 Happy Birthday, Malaika! 💖</h1>
+
+  <div style="font-size:55px">🎂🌹💐🎁</div>
+
+  <p id="finalMessage">
+    Dear Malaika,<br><br>
+    You are a special person, and today is your special day! ❤️
+    May your life be filled with happiness, peace, love, and countless
+    beautiful memories. May all your good wishes come true. 🌸✨
+    <br><br>
+    Keep smiling and keep shining! 💖
+    <br><br>
+    With lots of love and best wishes! 🎉
+  </p>
+
+  <button onclick="celebrateAgain()">Celebrate Again! 🎊</button>
+</section>
+
+<script>
+function showPage(number) {
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page" + number).classList.add("active");
+
+  if (number === 5) {
+    startCelebration();
+  }
+}
+
+let popped = 0;
+
+function popBalloon(balloon) {
+  if (balloon.classList.contains("popped")) return;
+
+  balloon.classList.add("popped");
+  popped++;
+
+  document.getElementById("balloonCount").textContent =
+    "Balloons left: " + (4 - popped) + (popped === 4 ? " 🎉" : " 🎈");
+
+  if (popped === 4) {
+    document.getElementById("wishButton").classList.remove("hidden");
+  }
+}
+
+function blowCandles() {
+  document.querySelectorAll(".flame").forEach(function(flame) {
+    flame.style.display = "none";
+  });
+
+  document.getElementById("blowButton").classList.add("hidden");
+  document.getElementById("cutButton").classList.remove("hidden");
+
+  document.getElementById("cakeMessage").textContent =
+    "Wish made! ✨ Now it's time to cut the cake! 🎂";
+}
+
+function cutCake() {
+  document.getElementById("cake").classList.add("cut");
+  document.getElementById("cutButton").classList.add("hidden");
+
+  document.getElementById("cakeMessage").textContent =
+    "Yay! The cake is ready! 🎂💖";
+
+  setTimeout(function() {
+    showPage(5);
+  }, 1800);
+}
+
+let celebrationTimer;
+
+function startCelebration() {
+  if (celebrationTimer) return;
+
+  celebrationTimer = setInterval(createHeart, 350);
+
+  setTimeout(function() {
+    clearInterval(celebrationTimer);
+    celebrationTimer = null;
+  }, 10000);
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  const decorations = ["💖", "❤️", "💕", "🌸", "🌹", "✨", "🎉"];
+
+  heart.className = "heart";
+  heart.textContent =
+    decorations[Math.floor(Math.random() * decorations.length)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(function() {
+    heart.remove();
+  }, 6000);
+}
+
+function celebrateAgain() {
+  startCelebration();
+}
+</script>
+
+</body>
+</html>
